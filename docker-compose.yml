@@ -1,9 +1,20 @@
 version: '3.1'
 
 services:
+
+  db15:
+    image: postgres:10.0
+    restart: always
+    container_name: db15
+    networks:
+      - pg
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: admin
   
   odoo:
-    image: odoo:15.0
+    image: pandoo/odoo:15.0
     restart: always
     container_name: odoo
     ports:
@@ -21,17 +32,7 @@ services:
       # crear las rutas locales
       # - ~/Code/addons/8.0:/mnt/extra-addons
       # - ~/Code/addons/8.0/testing:/mnt/extra-addons
-      
-  db15:
-    image: postgres:10.0
-    restart: always
-    container_name: db15
-    networks:
-      - pg
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: odoo
-      POSTGRES_PASSWORD: admin
+    tty: true
 
 networks:
   pg:

@@ -2,36 +2,36 @@ version: '3.1'
 
 services:
   
-  db_8:
-    image: postgres:9.4
+  odoo:
+    image: odoo:15.0
     restart: always
-    container_name: db_8
-    networks:
-      - pg
-    environment:
-      POSTGRES_USER: odoo8
-      POSTGRES_PASSWORD: odoo8
-
-  odoo8:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    restart: always
-    container_name: odoo_8
+    container_name: odoo
     ports:
-      - 8070:8069
+      - 8069:8069
     networks:
       - pg
     links:
-      - db_8:db
+      - db15:db
     environment:
-      USER: odoo8
-      PASSWORD: odoo8
+      USER: odoo
+      PASSWORD: admin
     volumes:
       - ./config:/etc/odoo
+      - ~/Code/odoo-ee/15.0:/mnt/enterprise/
       # crear las rutas locales
       # - ~/Code/addons/8.0:/mnt/extra-addons
       # - ~/Code/addons/8.0/testing:/mnt/extra-addons
+      
+  db15:
+    image: postgres:10.0
+    restart: always
+    container_name: db15
+    networks:
+      - pg
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: admin
 
 networks:
   pg:

@@ -6,27 +6,32 @@ services:
     image: postgres:13.0
     restart: always
     container_name: db15
+    networks:
+      - pg
     environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=odoo
-      - POSTGRES_PASSWORD=admin
-
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: admin
+  
   odoo:
     image: pandoo/odoo:15.0-arm64
     restart: always
     container_name: odoo
-    depends_on:
-      - db15
     ports:
       - 8069:8069
+    networks:
+      - pg
+    links:
+      - db15:db
     environment:
-      - HOST=db15
-      - USER=odoo
-      - PASSWORD=admin
+      USER: odoo
+      PASSWORD: admin
     volumes:
-      - ./config:/etc/odoo/
-      - ~/Code/odoo-ee/15.0/:/mnt/enterprise/
+      - ./config:/etc/odoo
+      - ~/Code/odoo-ee/15.0/:/mnt/enterprise-addons
       # Add volumes according to your odoo.conf
       # - ~/Code/addons/15.0/extra:/mnt/extra-addons
     tty: true
 
+networks:
+  pg:

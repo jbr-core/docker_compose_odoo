@@ -14,7 +14,7 @@ services:
       POSTGRES_PASSWORD: admin
   
   odoo:
-    image: pandoo/odoo:15.0
+    image: pandoo/odoo:15.0-arm64
     restart: always
     container_name: odoo
     ports:
@@ -27,11 +27,10 @@ services:
       USER: odoo
       PASSWORD: admin
     volumes:
-      - ./config:/etc/odoo
+      - ./config:/etc/odoo/
       - ~/Code/odoo-ee/15.0:/mnt/enterprise/
-      # crear las rutas locales
-      # - ~/Code/addons/8.0:/mnt/extra-addons
-      # - ~/Code/addons/8.0/testing:/mnt/extra-addons
+      # Add volumes according to your odoo.conf
+      # - ~/Code/addons/15.0/extra:/mnt/extra-addons
     tty: true
 
 networks:

@@ -2,10 +2,10 @@ version: '3.1'
 
 services:
 
-  db15:
+  db16:
     image: postgres:13.0
     restart: always
-    container_name: db15
+    container_name: db16
     networks:
       - pg
     environment:
@@ -14,7 +14,7 @@ services:
       POSTGRES_PASSWORD: odoo
   
   odoo:
-    image: pandoo/odoo:15.0-arm64
+    image: pandoo/odoo:16.0-amd64
     restart: always
     container_name: odoo
     ports:
@@ -22,7 +22,7 @@ services:
     networks:
       - pg
     links:
-      - db15:db
+      - db16:db
     environment:
       USER: odoo
       PASSWORD: odoo

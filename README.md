@@ -1,1 +1,1 @@
-# Odoo 15 and postgres 10 with Docker Compose
+# Odoo 16 and postgres 13 with Docker Compose

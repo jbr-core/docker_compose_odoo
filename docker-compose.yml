@@ -14,7 +14,7 @@ services:
       POSTGRES_PASSWORD: odoo
   
   odoo:
-    image: pandoo/odoo:16.0-amd64
+    image: pandoo/odoo:16.0-arm64
     restart: always
     container_name: odoo
     ports:

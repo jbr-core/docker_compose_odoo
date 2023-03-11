@@ -12,7 +12,7 @@ services:
       POSTGRES_DB: postgres
       POSTGRES_USER: odoo
       POSTGRES_PASSWORD: odoo
-  
+
   odoo:
     image: pandoo/odoo:16.0-arm64
     restart: always

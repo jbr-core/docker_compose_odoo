@@ -24,6 +24,7 @@ services:
     links:
       - db15:db
     environment:
+      HOST: db15
       USER: odoo
       PASSWORD: odoo
     volumes:
